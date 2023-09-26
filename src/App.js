@@ -1,12 +1,27 @@
 import React from "react"
 import "./App"
-import { Routes, Route } from "react-router-dom"
+import { Routes, Route, useLocation } from "react-router-dom"
+import Particles from "react-tsparticles"
+import { loadFull } from "tsparticles"
 import { Home, About, Resume, Skills, Portfolio, Contact } from "./containers"
 import Navbar from "./components/navBar/Navbar"
+import particles from "./utils.js/particles"
+
 const App = () => {
+  const location = useLocation()
+  console.log(location)
+  const handleInit = async (main) => {
+    await loadFull(main)
+  }
+  const renderParticlesJsInHomePage = location.pathname === "/"
+
   return (
     <div className="App">
       {/* particles.js */}
+      {renderParticlesJsInHomePage && (
+        <Particles id="particles" options={particles} init={handleInit} />
+      )}
+
       {/* navbar.js */}
       <Navbar />
       {/* main pagevcontent*/}
