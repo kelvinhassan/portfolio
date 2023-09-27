@@ -9,7 +9,7 @@ import {
   DiReact,
   DiVisualstudio,
 } from "react-icons/di"
-import { FaDev, FaDatabase } from "react-icons/fa"
+import { FaGithub, FaDatabase } from "react-icons/fa"
 
 const personalDetails = [
   {
@@ -96,7 +96,7 @@ const About = () => {
           >
             <div className="about__content__servicesWrapper__innerContent">
               <div>
-                <FaDev size={60} color="var( --yellow-theme-main-color)" />
+                <FaGithub size={60} color="var( --yellow-theme-main-color)" />
               </div>
               <div>
                 <DiPython size={60} color="var(--yellow-theme-main-color)" />
