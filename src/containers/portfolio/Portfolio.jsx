@@ -67,6 +67,10 @@ const Portfolio = () => {
     setHoveredValue(index)
   }
 
+  const handleClick = (currentLink) => {
+    window.location.href = currentLink
+  }
+
   const filteredItems =
     filteredValue === 1
       ? portfolioData
@@ -107,7 +111,9 @@ const Portfolio = () => {
                 {index === hoveredValue && (
                   <div>
                     <p>{item.name}</p>
-                    <button>Visit</button>
+                    <button onClick={() => handleClick(item.link)}>
+                      Visit
+                    </button>
                   </div>
                 )}
               </div>
