@@ -7,7 +7,6 @@ import imageThree from "../../helper/images/concept.jpg"
 import imageFour from "../../helper/images/filmstripes.jpg"
 import imageFive from "../../helper/images/markus-spiske.jpg"
 import "./style.scss"
-
 const portfolioData = [
   {
     id: 2,

@@ -1,10 +1,32 @@
-import React from "react"
+import React, { useRef } from "react"
+import emailjs from "@emailjs/browser"
 import { MdContactMail } from "react-icons/md"
 import PageHeaderContent from "../../components/pageHeaderContent/PageHeaderContent"
 import { Animate } from "react-simple-animate"
 import "./style.scss"
 
 const Contact = () => {
+  const form = useRef()
+
+  const sendEmail = (e) => {
+    e.preventDefault()
+
+    emailjs
+      .sendForm(
+        "service_y66dq7d",
+        "template_obw661r",
+        form.current,
+        "Mgi0dwPMAJKtCNPd3"
+      )
+      .then(
+        (result) => {
+          console.log(result.text)
+        },
+        (error) => {
+          console.log(error.text)
+        }
+      )
+  }
   return (
     <section id="contact" className="contact">
       <PageHeaderContent
@@ -36,12 +58,16 @@ const Contact = () => {
             transform: "translateX(0px)",
           }}
         >
-          <div className="contact__content__form">
+          <form
+            className="contact__content__form"
+            ref={form}
+            onSubmit={sendEmail}
+          >
             <div className="contact__content__form__controlWrapper">
               <div>
                 <input
                   required
-                  name="name"
+                  name="user_name"
                   className="inputName"
                   type={"text"}
                 />
@@ -52,7 +78,7 @@ const Contact = () => {
               <div>
                 <input
                   required
-                  name="email"
+                  name="user_email"
                   className="inputEmail"
                   type={"email"}
                 />
@@ -64,7 +90,7 @@ const Contact = () => {
                 <textarea
                   required
                   className="inputDescription"
-                  name="description"
+                  name="message"
                   rows="5"
                 />
                 <label htmlFor="description" className="descriptionLabel">
@@ -72,8 +98,8 @@ const Contact = () => {
                 </label>
               </div>
             </div>
-            <button>Submit</button>
-          </div>
+            <button type="submit">Submit</button>
+          </form>
         </Animate>
       </div>
     </section>
