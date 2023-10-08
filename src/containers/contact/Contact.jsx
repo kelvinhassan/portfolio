@@ -41,7 +41,6 @@ const Contact = () => {
     e.preventDefault()
     setFormErrors(validate(formValues))
     setIsSubmit(true)
-    sendEmail()
     setFormValues(initialValues)
   }
 
@@ -65,7 +64,7 @@ const Contact = () => {
     }
     if (!values.message) {
       errors.message = "message is required"
-    } else if (values.message.length < 10) {
+    } else if (values.message.length < 30) {
       errors.message = "The email is too short"
     }
 
@@ -152,9 +151,12 @@ const Contact = () => {
                   {formErrors.message}
                 </label>
                 {Object.keys(formErrors).length === 0 && isSubmit ? (
-                  <div className="descriptionLabel">
-                    Email sent Successfully
-                  </div>
+                  (sendEmail(),
+                  (
+                    <div className="descriptionLabel">
+                      Email sent Successfully
+                    </div>
+                  ))
                 ) : (
                   <p></p>
                 )}
