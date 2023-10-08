@@ -53,13 +53,26 @@
             color: var(--yellow-theme-sub-text-color);
           }
           .nameLabel,
-          .emailLabel,
-          .descriptionLabel {
+          .emailLabel {
             font-weight: 500;
             position: absolute;
             top: 7px;
             left: 12px;
             transition: all 0.2s ease;
+            color: var(--yellow-theme-sub-text-color);
+            font-size: 16px;
+          }
+          .descriptionLabel {
+            font-weight: 500;
+            position: relative;
+            top: 7px;
+            left: 12px;
+            color: var(--yellow-theme-sub-text-color);
+            font-size: 16px;
+          }
+          .contact__content_sent {
+            font-weight: 500;
+            position: relative;
             color: var(--yellow-theme-sub-text-color);
             font-size: 16px;
           }

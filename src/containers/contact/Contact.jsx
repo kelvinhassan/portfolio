@@ -1,16 +1,14 @@
-import React, { useRef } from "react"
-import emailjs from "@emailjs/browser"
+import React, { useRef, useState, useEffect } from "react"
+//import emailjs from "@emailjs/browser"
 import { MdContactMail } from "react-icons/md"
 import PageHeaderContent from "../../components/pageHeaderContent/PageHeaderContent"
 import { Animate } from "react-simple-animate"
+import emailjs from "@emailjs/browser"
 import "./style.scss"
 
 const Contact = () => {
   const form = useRef()
-
-  const sendEmail = (e) => {
-    e.preventDefault()
-
+  const sendEmail = () => {
     emailjs
       .sendForm(
         "service_y66dq7d",
@@ -27,6 +25,53 @@ const Contact = () => {
         }
       )
   }
+
+  const initialValues = { user_name: "", user_email: "", message: "" }
+  const [formValues, setFormValues] = useState(initialValues)
+  const [formErrors, setFormErrors] = useState({})
+  const [isSubmit, setIsSubmit] = useState(false)
+
+  const handleChange = (e) => {
+    const { name, value } = e.target
+    setFormValues({ ...formValues, [name]: value })
+    console.log(formValues)
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    setFormErrors(validate(formValues))
+    setIsSubmit(true)
+    sendEmail()
+    setFormValues(initialValues)
+  }
+
+  useEffect(() => {
+    console.log(formErrors)
+    if (Object.keys(formErrors).length === 0 && isSubmit) {
+      console.log(formValues)
+    }
+  })
+
+  const validate = (values) => {
+    const errors = {}
+    const regex = /^[a-zA-Z0-9]+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/i
+    if (!values.user_name) {
+      errors.user_name = "Name is required"
+    }
+    if (!values.user_email) {
+      errors.user_email = "email is required"
+    } else if (!regex.test(values.user_email)) {
+      errors.user_email = "This is not a valid email format"
+    }
+    if (!values.message) {
+      errors.message = "message is required"
+    } else if (values.message.length < 10) {
+      errors.message = "The email is too short"
+    }
+
+    return errors
+  }
+
   return (
     <section id="contact" className="contact">
       <PageHeaderContent
@@ -46,6 +91,7 @@ const Contact = () => {
           }}
         >
           <h3 className="contact__content__header-text">Let's Talk</h3>
+          <br />
         </Animate>
         <Animate
           play
@@ -61,7 +107,7 @@ const Contact = () => {
           <form
             className="contact__content__form"
             ref={form}
-            onSubmit={sendEmail}
+            onSubmit={handleSubmit}
           >
             <div className="contact__content__form__controlWrapper">
               <div>
@@ -70,10 +116,13 @@ const Contact = () => {
                   name="user_name"
                   className="inputName"
                   type={"text"}
+                  value={formValues.user_name}
+                  onChange={handleChange}
                 />
                 <label htmlFor="name" className="nameLabel">
                   Name
                 </label>
+                <p>{formErrors.user_name}</p>
               </div>
               <div>
                 <input
@@ -81,10 +130,13 @@ const Contact = () => {
                   name="user_email"
                   className="inputEmail"
                   type={"email"}
+                  value={formValues.user_email}
+                  onChange={handleChange}
                 />
                 <label htmlFor="email" className="emailLabel">
                   Email
                 </label>
+                <p>{formErrors.user_email}</p>
               </div>
               <div>
                 <textarea
@@ -92,10 +144,20 @@ const Contact = () => {
                   className="inputDescription"
                   name="message"
                   rows="5"
+                  placeholder="Write your email here"
+                  value={formValues.message}
+                  onChange={handleChange}
                 />
                 <label htmlFor="description" className="descriptionLabel">
-                  Descritption
+                  {formErrors.message}
                 </label>
+                {Object.keys(formErrors).length === 0 && isSubmit ? (
+                  <div className="descriptionLabel">
+                    Email sent Successfully
+                  </div>
+                ) : (
+                  <p></p>
+                )}
               </div>
             </div>
             <button type="submit">Submit</button>
