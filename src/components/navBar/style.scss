@@ -61,17 +61,20 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width: 100%;
+    width: 50%;
+    z-index: 1;
     position: absolute;
     top: 80px;
     left: -110%;
-    opacity: 5;
+    opacity: 0;
     transition: all 0.5s ease;
 
     &.active {
-      background: #181818;
+      background: #050000;
       left: 0px;
       opacity: 1;
+      top: 0;
+      z-index: 2;
     }
 
     &__item {
