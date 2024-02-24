@@ -1,94 +1,93 @@
 .navbar {
-  background-color: #181818;
-  height: 80px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 1.2rem;
-  position: sticky;
-
-  &__container {
+    background-color: #181818;
+    height: 80px;
     display: flex;
+    justify-content: center;
+    padding: 0 50px;
     align-items: center;
-    width: 100%;
-    height: inherit;
-    padding: 0px 20px;
-    flex: 1;
-
-    &__logo {
-      color: var(--yellow-theme-main-color);
-      cursor: pointer;
+    z-index: 999;
+    font-size: 1.2rem;
+    position: sticky;
+    &__container {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        height: inherit;
+        padding: 0px 20px;
+        flex: 1;
+        &__logo {
+            color: var(--yellow-theme-main-color);
+            cursor: pointer;
+        }
+        &__menu {
+            display: flex;
+            list-style: none;
+            text-align: center;
+            &__item {
+                line-height: 40px;
+                margin-right: 1.5rem;
+                font-size: 1.6rem;
+                &::after {
+                    content: "";
+                    display: block;
+                    height: 3px;
+                    width: 0;
+                    background: transparent;
+                    transition: all 0.5s ease;
+                }
+                &:hover::after {
+                    width: 100%;
+                    background: var(--yellow-theme-main-color);
+                }
+                &__links {
+                    color: var(--yellow-theme-main-color);
+                    text-decoration: none;
+                    padding: 0.5rem;
+                }
+            }
+        }
     }
-    &__menu {
-      display: flex;
-      list-style: none;
-      text-align: center;
-
-      &__item {
-        line-height: 40px;
-        margin-right: 1.5rem;
-        font-size: 1.6rem;
-
-        &::after {
-          content: "";
-          display: block;
-          height: 3px;
-          width: 0;
-          background: transparent;
-          transition: all 0.5s ease;
-        }
-
-        &:hover::after {
-          width: 100%;
-          background: var(--yellow-theme-main-color);
-        }
-
-        &__links {
-          color: var(--yellow-theme-main-color);
-          text-decoration: none;
-          padding: 0.5rem;
-        }
-      }
-    }
-  }
 }
+
 .nav-icon {
-  display: none;
+    display: none;
 }
 
 @media only screen and (max-width: 768px) {
-  .navbar__container__menu {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 100%; /* Updated to 100% */
-    z-index: 1000;
-    position: absolute;
-    top: 0; /* Updated to 0 */
-    left: -110%;
-    opacity: 0;
-    transition: all 0.5s ease;
-
-    &.active {
-      background: #050000;
-      left: 0px;
-      opacity: 1;
-      top: 0;
-      z-index: 2;
+    .navbar {
+        padding: 0 20px;
     }
-
-    &__item {
-      border-bottom: 1px solid #282828;
-      margin: 0px;
-      padding: 20px 0px;
+    .nav-icon {
+        display: block;
+        cursor: pointer;
+        color: var(--yellow-theme-main-color);
+        padding-right: 20px;
     }
-  }
-}
-
-  .nav-icon {
-    display: block;
-    cursor: pointer;
-    color: var(--yellow-theme-main-color);
-    padding-right: 20px;
-  }
+    .navbar__container__menu {
+        background-color: #181818;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        width: 200px;
+        position: fixed;
+        top: 70px;
+        opacity: 0;
+        right: -50px;
+        max-height: 500px;
+        z-index: 999;
+        transition: all 0.5s ease-in-out;
+        &.active {
+            // background: #050000;
+            right: 0;
+            opacity: 1;
+            top: 70px;
+            // z-index: 0;
+        }
+        &__item {
+            // border-bottom: 1px solid #282828;
+            margin: 0px;
+            padding: 15px 10px;
+        }
+    }
 }

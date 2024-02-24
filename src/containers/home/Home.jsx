@@ -23,7 +23,7 @@ const Home = () => {
         duration={1.5}
         delay={1}
         start={{
-          transform: "translateY(550px)", // Corrected spelling
+          transform: "translateY(500px)", // Corrected spelling
         }}
         end={{
           transform: "translateY(0px)", // Use translateY to bring it up from the bottom

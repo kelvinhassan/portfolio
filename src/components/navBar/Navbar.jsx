@@ -58,7 +58,7 @@ const Navbar = () => {
           ))}
         </ul>
         <div className="nav-icon" onClick={handleToggleIcon}>
-          {toggleIcon ? <HiX size={30} /> : <FaBars size={30} />}
+          {toggleIcon ? <HiX size={25} /> : <FaBars size={25} />}
         </div>
       </nav>
     </div>
